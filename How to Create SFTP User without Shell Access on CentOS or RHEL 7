@@ -72,8 +72,8 @@ Connecting to sftp.tecadmin.net...
 sftpuser@sftp.tecadmin.net's password:
 sftp>
 
-As this account is configured for SFTP only connection. So if any user tried to connect via SSH will be disconnected immediately after successful authentication.
-User will get below message:
+As this account is configured for SFTP only connection. So if any user tried to connect via SSH will be disconnected immediately after successful
+authentication. User will get below message:
 
 Code:
 
