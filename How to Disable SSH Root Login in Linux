@@ -74,4 +74,5 @@ root@adc1:~#
 
 That's all! You shouldn't be able remotely login to SSH server with root account via password or via public key authentication mechanisms.
 
+
 References: https://www.tecmint.com/disable-ssh-root-login-in-linux/
