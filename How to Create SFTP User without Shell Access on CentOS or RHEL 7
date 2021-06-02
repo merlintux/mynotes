@@ -1,0 +1,87 @@
+This tutorial will help you to create SFTP only user (without ssh access) on CentOS and RedHat systems. The user can connect the server with SFTP access only
+and allowed to access the specified directory. Users can't SSH into the server. Follow the below tutorial to create sftp only account.
+
+Step 1 - Create Account
+
+First of all, create a user account to use for sftp access. Below command will create user named sftpuser with no shell access.
+
+Code:
+
+sudo adduser --shell /bin/false sftpuser
+sudo passwd sftpuser
+
+Step 2 - Create Directory
+
+Now, create the directory structure to be accessible by sftp user.
+
+Code:
+
+sudo mkdir -p /var/sftp/files
+
+Change the ownership of the files directory to sftp user. So that the sftpuser can read and write on this directory.
+
+Code:
+
+sudo chown sftpuser:sftpuser /var/sftp/files
+
+And set the owner and group owner of the /var/sftp to root. The root user has read/write access on this access. Group members and other accounts have only read and execute permissions.
+
+Code:
+
+sudo chown root:root /var/sftp
+sudo chmod 755 /var/sftp
+
+Step 3 - Configure SSH for SFTP
+
+Now edit the SSH configuration file in a text editor
+
+Code:
+
+sudo vim /etc/ssh/sshd_config
+
+and add the following settings at end of file.
+
+Code:
+
+Match User sftpuser
+     ForceCommand internal-sftp
+     PasswordAuthentication yes
+     ChrootDirectory /var/sftp
+     PermitTunnel no
+     AllowAgentForwarding no
+     AllowTcpForwarding no
+     X11Forwarding no
+
+Save the configuration and restart SSH service to apply changes.
+
+Code:
+
+sudo systemctl restart sshd.service
+
+Step 4 - Test SFTP Connection
+
+I am using FileZilla for the connection to the SFTP instance from my Windows systems. Linux desktop users can also use Filezilla for connection. For the Linux server, users can use sftp command-line utility to connect to remote sftp instance.
+
+Code:
+
+$ sftp sftpuser@sftp.tecadmin.netCode:
+
+Connecting to sftp.tecadmin.net...
+sftpuser@sftp.tecadmin.net's password:
+sftp>
+
+As this account is configured for SFTP only connection. So if any user tried to connect via SSH will be disconnected immediately after successful authentication. User will get below message:
+
+Code:
+
+$ ssh sftpuser@sftp.tecadmin.net
+
+Code:
+
+sftpuser@sftp.tecadmin.net's password:
+This service allows sftp connections only.
+Connection to sftp.tecadmin.net closed.
+
+
+
+References: https://tecadmin.net/create-sftp-only-user-centos/
