@@ -24,7 +24,8 @@ Code:
 
 sudo chown sftpuser:sftpuser /var/sftp/files
 
-And set the owner and group owner of the /var/sftp to root. The root user has read/write access on this access. Group members and other accounts have only read and execute permissions.
+And set the owner and group owner of the /var/sftp to root. The root user has read/write access on this access. Group members and other accounts have only
+read and execute permissions.
 
 Code:
 
@@ -60,7 +61,8 @@ sudo systemctl restart sshd.service
 
 Step 4 - Test SFTP Connection
 
-I am using FileZilla for the connection to the SFTP instance from my Windows systems. Linux desktop users can also use Filezilla for connection. For the Linux server, users can use sftp command-line utility to connect to remote sftp instance.
+I am using FileZilla for the connection to the SFTP instance from my Windows systems. Linux desktop users can also use Filezilla for connection.
+For the Linux server, users can use sftp command-line utility to connect to remote sftp instance.
 
 Code:
 
@@ -70,7 +72,8 @@ Connecting to sftp.tecadmin.net...
 sftpuser@sftp.tecadmin.net's password:
 sftp>
 
-As this account is configured for SFTP only connection. So if any user tried to connect via SSH will be disconnected immediately after successful authentication. User will get below message:
+As this account is configured for SFTP only connection. So if any user tried to connect via SSH will be disconnected immediately after successful authentication.
+User will get below message:
 
 Code:
 
